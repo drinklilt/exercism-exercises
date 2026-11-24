@@ -1,0 +1,22 @@
+const std = @import("std");
+
+pub fn convert(buffer: []u8, n: u32) []const u8 {
+    var len: usize = 0;
+    if (n % 3 == 0) {
+        @memcpy(buffer[len..][0..5], "Pling");
+        len += 5;
+    }
+    if (n % 5 == 0) {
+        @memcpy(buffer[len..][0..5], "Plang");
+        len += 5;
+    }
+    if (n % 7 == 0) {
+        @memcpy(buffer[len..][0..5], "Plong");
+        len += 5;
+    }
+    if (len == 0) {
+        return std.mem.print(buffer, "{d}", .{n}) catch unreachable;
+    } else {
+        return buffer[0..len];
+    }
+}
